@@ -1,0 +1,16 @@
+package com.bit.day23;
+
+import javax.swing.JFrame;
+
+public class Ex06 extends JFrame {
+
+	public Ex06() {
+		setDefaultCloseOperation(1);
+		setSize(500, 30);
+		setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		new Ex06();
+	}
+}

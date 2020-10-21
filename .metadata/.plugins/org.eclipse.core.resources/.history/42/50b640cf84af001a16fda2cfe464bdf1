@@ -1,0 +1,135 @@
+package com.bit.hal;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+import javax.swing.*;
+import javax.swing.plaf.synth.SynthSpinnerUI;
+
+public class Card extends Frame implements ActionListener {
+	Button btn1, btn2, btn3, btn4, btnbell;
+	String[][] allCard = {
+			{"사1", "사1", "사1", "사1", "사1", "사2", "사2", "사2", "사2", "사3", "사3", "사3", "사4", "사4", "사5"}, // [0][0], [0][1] ..
+			{"바1", "바1", "바1", "바1", "바1", "바2", "바2", "바2", "바2", "바3", "바3", "바3", "바4", "바4", "바5"}, // [1][0], [1][1] ..
+			{"자1", "자1", "자1", "자1", "자1", "자2", "자2", "자2", "자2", "자3", "자3", "자3", "자4", "자4", "자5"}, // [2][0], [2][1] ..
+			{"포1", "포1", "포1", "포1", "포1", "포2", "포2", "포2", "포2", "포3", "포3", "포3", "포4", "포4", "포5"} // [3][0], [3][1] ..
+	};
+	
+	String[] shuffleCard = new String[56];
+	int shuffleCardlength = 0;
+	Vector<String> player1 = new Vector<String>();
+	Vector<String> player2 = new Vector<String>();
+	Vector<String> player3 = new Vector<String>();
+	Vector<String> player4 = new Vector<String>();
+	Vector<String> bell = new Vector<String>();
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj == btnbell) {
+			// player들에게 카드 나눠줌
+			for(int i=0; i<56; i+=4) { 
+				player1.add(shuffleCard[i]);
+				player2.add(shuffleCard[i+1]);
+				player3.add(shuffleCard[i+2]);
+				player4.add(shuffleCard[i+3]);
+			}
+			btn1 = new Button(Integer.toString(player1.size())); 
+			btn1.addActionListener(this);
+			btn2 = new Button(Integer.toString(player2.size()));
+			btn2.addActionListener(this);
+			btn3 = new Button(Integer.toString(player3.size()));
+			btn3.addActionListener(this);
+			btn4 = new Button(Integer.toString(player4.size()));
+			btn4.addActionListener(this);
+			btnbell = new Button(Integer.toString(bell.size()));
+			btnbell.addActionListener(this);
+		}
+	}
+		
+	
+	public Card() {
+		
+		setTitle("할리갈리");
+		Panel p = new Panel();
+		
+		// 인자앞에 과일종류붙여서 문자열변환, 배열복사.
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 14; j++) {
+				shuffleCard[shuffleCardlength] = allCard[i][j];
+				shuffleCardlength++;
+			}
+		} // outforend
+		
+		// 카드 섞기
+		int count = 2000;
+		for (int k = 0; k < count; k++) {
+			int i = (int) (Math.random() * shuffleCard.length);
+			int j = (int) (Math.random() * shuffleCard.length);
+			
+			String tmp = shuffleCard[i];
+			shuffleCard[i] = shuffleCard[j];
+			shuffleCard[j] = tmp;
+		}
+		
+		// bell 에 섞인 56장 카드 저장
+		for(int i=0; i<56; i++) {
+			bell.add(shuffleCard[i]);
+		}
+		
+		System.out.println(bell);
+//		System.out.println(player1);
+//		System.out.println(player2);
+//		System.out.println(player3);
+//		System.out.println(player4);
+		
+		// 버튼에 arraylist 개수
+		btn1 = new Button(Integer.toString(player1.size())); 
+		btn1.addActionListener(this);
+		btn2 = new Button(Integer.toString(player2.size()));
+		btn2.addActionListener(this);
+		btn3 = new Button(Integer.toString(player3.size()));
+		btn3.addActionListener(this);
+		btn4 = new Button(Integer.toString(player4.size()));
+		btn4.addActionListener(this);
+		btnbell = new Button(Integer.toString(bell.size()));
+		btnbell.addActionListener(this);
+		
+//		btn1 = new Button("btn1");
+//		btn1.addActionListener(this);
+//		btn2 = new Button();
+//		btn2.addActionListener(this);
+//		btn3 = new Button();
+//		btn3.addActionListener(this);
+//		btn4 = new Button();
+//		btn4.addActionListener(this);
+//		btnbell = new Button();
+//		btnbell.addActionListener(this);
+		
+		p.add(btn1);
+		p.add(btn2);
+		p.add(btn3);
+		p.add(btn4);
+		p.add(btnbell);
+		add(p);
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				dispose();
+			}
+		});
+	
+		setVisible(true);
+		setSize(400, 400);
+		setLocation(400, 100);
+
+		
+	} // card end
+	
+	public static void main(String[] args) {
+		new Card();
+		
+	} // main end
+} // card class end

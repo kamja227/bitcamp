@@ -1,0 +1,47 @@
+package com.bit.day17;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class BookViewer {
+	private BookController bookController;
+	private Scanner scanner;
+	
+	public BookViewer() {
+		scanner = new Scanner(System.in);
+		ArrayList<BookVO> inventory = new ArrayList<>();
+		BookVO b = new BookVO();
+		
+		b = new BookVO();
+		b.setId(1);
+		b.setTitle("슬램덩크");
+		b.setAuthor("만화작가");
+		b.setPrice(500);
+		inventory.add(b);
+		
+		b.setId(2);
+		b.setTitle("명탐정 코난");
+		b.setAuthor("만화작가2");
+		b.setPrice(300);
+		inventory.add(b);
+			
+		b.setId(3);
+		b.setTitle("소년탐정 김전일");
+		b.setAuthor("만화작가3");
+		b.setPrice(400);
+		b.setId(400);
+		inventory.add(b);
+		
+		ArrayList<BookVO> rent = new ArrayList<>();
+		bookController = new BookController(inventory, rent);
+	}
+	private void showMenu() {
+		while(true) {
+			System.out.println("====================");
+			System.out.println("비트 도서대여점");
+			System.out.println("====================");
+			System.out.println("1. 대여 2. 반납 3. 출력 4. 종료");
+			System.out.println("> 
+		}
+	}
+}

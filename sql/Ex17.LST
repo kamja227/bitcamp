@@ -1,0 +1,1460 @@
+SQL> create table Ex17(num  number, name varchar2(15));
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex17 (name) value ('no1');
+insert into Ex17 (name) value ('no1')
+                        *
+1행에 오류:
+ORA-00926: 누락된 VALUES 키워드 
+
+
+SQL> insert into Ex17 (name) values ('no1');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 (name) values ('no2');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> select * from Ex17;
+
+       NUM NAME                                                                 
+---------- ------------------------------                                       
+           no1                                                                  
+           no2                                                                  
+
+SQL> insert into Ex17 (name) values ('no1');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> select * from Ex17 where num is null;
+
+       NUM NAME                                                                 
+---------- ------------------------------                                       
+           no1                                                                  
+           no2                                                                  
+           no1                                                                  
+
+SQL> drop table Ex17;
+
+테이블이 삭제되었습니다.
+
+SQL> create table Ex17 (num number, name varchar2(15) not null);
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex17 values (1, 'no1');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 values (1, 'no2');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 values (1,
+  2  '');
+'')
+*
+2행에 오류:
+ORA-01400: NULL을 ("SCOTT"."EX17"."NAME") 안에 삽입할 수 없습니다 
+
+
+SQL> insert into Ex17 values (1, '');
+insert into Ex17 values (1, '')
+                            *
+1행에 오류:
+ORA-01400: NULL을 ("SCOTT"."EX17"."NAME") 안에 삽입할 수 없습니다 
+
+
+SQL> insert into Ex17 (num) values (3);
+insert into Ex17 (num) values (3)
+*
+1행에 오류:
+ORA-01400: NULL을 ("SCOTT"."EX17"."NAME") 안에 삽입할 수 없습니다 
+
+
+SQL> desc dept;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                    NOT NULL NUMBER(2)
+ DNAME                                              VARCHAR2(14)
+ LOC                                                VARCHAR2(13)
+
+SQL> insert into dept (dname, ioc) from ('test', 'test');
+insert into dept (dname, ioc) from ('test', 'test')
+                              *
+1행에 오류:
+ORA-00926: 누락된 VALUES 키워드 
+
+
+SQL> drop table Ex17;
+
+테이블이 삭제되었습니다.
+
+SQL> create table Ex17(num number, unique, name varchar2(15) not null);
+create table Ex17(num number, unique, name varchar2(15) not null)
+                                    *
+1행에 오류:
+ORA-00906: 누락된 좌괄호 
+
+
+SQL> create table Ex17(num number, unique . name varchar2(15) not null);
+create table Ex17(num number, unique . name varchar2(15) not null)
+                                     *
+1행에 오류:
+ORA-00906: 누락된 좌괄호 
+
+
+SQL> create table Ex17(num number unique . name varchar2(15) not null);
+create table Ex17(num number unique . name varchar2(15) not null)
+                                    *
+1행에 오류:
+ORA-00907: 누락된 우괄호 
+
+
+SQL> create table Ex17(num number unique , name varchar2(15) not null);
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex17 calues (1, 'test1');
+insert into Ex17 calues (1, 'test1')
+                         *
+1행에 오류:
+ORA-00928: 누락된 SELECT 키워드 
+
+
+SQL> insert into Ex17 values (1, 'test1');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 values (2, 'test2');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 values (1, 'test2');
+insert into Ex17 values (1, 'test2')
+*
+1행에 오류:
+ORA-00001: 무결성 제약 조건(SCOTT.SYS_C003999)에 위배됩니다 
+
+
+SQL> insert into Ex17 values (2, 'test1');
+insert into Ex17 values (2, 'test1')
+*
+1행에 오류:
+ORA-00001: 무결성 제약 조건(SCOTT.SYS_C003999)에 위배됩니다 
+
+
+SQL> insert into Ex17 values (3, 'test3');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> select * from Ex17 values (null, test3);
+select * from Ex17 values (null, test3)
+                   *
+1행에 오류:
+ORA-00933: SQL 명령어가 올바르게 종료되지 않았습니다 
+
+
+SQL> insert into Ex17 values (null, test3);
+insert into Ex17 values (null, test3)
+                               *
+1행에 오류:
+ORA-00984: 열을 사용할 수 없습니다 
+
+
+SQL> insert into Ex17 values (null, 'test3');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 values (null, 'test4');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> drop table Ex17;
+
+테이블이 삭제되었습니다.
+
+SQL> create table Ex16;
+create table Ex16
+                *
+1행에 오류:
+ORA-00906: 누락된 좌괄호 
+
+
+SQL> create table Ex16 (num number unique not null, name varchar2(15) not null);
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex17 values (1, 'test');
+insert into Ex17 values (1, 'test')
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> insert into Ex16 values (1, 'test');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex16 values (2,'test2');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> Ex16
+SP2-0042: 알 수 없는 명령어 "Ex16" - 나머지 줄 무시.
+SQL> insert into Ex16 values (null, 'test4');
+insert into Ex16 values (null, 'test4')
+                         *
+1행에 오류:
+ORA-01400: NULL을 ("SCOTT"."EX16"."NUM") 안에 삽입할 수 없습니다 
+
+
+SQL> drop table Ex16;
+
+테이블이 삭제되었습니다.
+
+SQL> create table Ex17 ( num number unique not null, name varchar2(15) not null);
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex17 values (1, 'test');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 values (2, 'test2');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> create table Ex17(
+  2  num number,
+  3  
+SQL> create
+  2  
+SQL> create
+  2  --
+  3  --
+  4  table Ex17(
+  5  --
+  6  ed Ex17.sql
+  7  
+SQL> ed Ex17.sql
+
+SQL> @Ex17.sql
+
+테이블이 삭제되었습니다.
+
+	name varchar2(15) not null
+	                         *
+3행에 오류:
+ORA-00907: 누락된 우괄호 
+
+
+SP2-0042: 알 수 없는 명령어 ")" - 나머지 줄 무시.
+SQL> ed Ex17.sql
+
+SQL> @Ex17.sql
+drop table Ex17
+           *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex17 values(1, 'test1');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 values(2, 'test2');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex17 values(null, 'test3');
+insert into Ex17 values(null, 'test3')
+                        *
+1행에 오류:
+ORA-01400: NULL을 ("SCOTT"."EX17"."NUM") 안에 삽입할 수 없습니다 
+
+
+SQL> desc Ex17;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ NUM                                       NOT NULL NUMBER
+ NAME                                      NOT NULL VARCHAR2(15)
+
+SQL> ed Ex18.sql
+
+SQL> E
+SP2-0042: 알 수 없는 명령어 "E" - 나머지 줄 무시.
+SQL> @Ex18.sql
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex18 values(1, 'test1');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex18 values(2, 'test2');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex18 values(3, 'test1');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex18 values(1, 'test1');
+insert into Ex18 values(1, 'test1')
+*
+1행에 오류:
+ORA-00001: 무결성 제약 조건(SCOTT.SYS_C004008)에 위배됩니다 
+
+
+SQL> ed Ex18.sql
+
+SQL> alter table Ex18 modify (name varchar2(15) not null);
+
+테이블이 변경되었습니다.
+
+SQL> insert into Ex18 values (3, null);
+insert into Ex18 values (3, null)
+                            *
+1행에 오류:
+ORA-01400: NULL을 ("SCOTT"."EX18"."NAME") 안에 삽입할 수 없습니다 
+
+
+SQL> select * from Ex18;
+
+       NUM NAME                                                                 
+---------- ------------------------------                                       
+         1 test1                                                                
+         2 test2                                                                
+         3 test1                                                                
+
+SQL> desc Ex18
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ NUM                                       NOT NULL NUMBER
+ NAME                                      NOT NULL VARCHAR2(15)
+
+SQL> ed Ex18.sql
+
+SQL> insert into Ex18 values (1, 'test1');
+insert into Ex18 values (1, 'test1')
+*
+1행에 오류:
+ORA-00001: 무결성 제약 조건(SCOTT.SYS_C004008)에 위배됩니다 
+
+
+SQL> @Ex18.sql
+
+테이블이 삭제되었습니다.
+
+
+테이블이 생성되었습니다.
+
+
+테이블이 변경되었습니다.
+
+
+테이블이 변경되었습니다.
+
+SQL> ed Ex19.sql
+
+SQL> @Ex19.sql
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex19 values(1, 'test1');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex19 values (2, 'test2');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex19 values (3, 'test3');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex19 values (null, 'test4');
+insert into Ex19 values (null, 'test4')
+                         *
+1행에 오류:
+ORA-01400: NULL을 ("SCOTT"."EX19"."NUM") 안에 삽입할 수 없습니다 
+
+
+SQL> insert into Ex19 values (1, 'test4');
+insert into Ex19 values (1, 'test4')
+*
+1행에 오류:
+ORA-00001: 무결성 제약 조건(SCOTT.EX19_NUM_PK)에 위배됩니다 
+
+
+SQL> ed Ex19.sql
+
+SQL> alter table Ex19 drop constraint Ex19_num_pk;
+
+테이블이 변경되었습니다.
+
+SQL> insert into Ex19 values(1, 'test3');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> select * from Ex19;
+
+       NUM NAME                                                                 
+---------- ------------------------------                                       
+         1 test1                                                                
+         2 test2                                                                
+         3 test3                                                                
+         1 test3                                                                
+
+SQL> drop table Ex19;
+
+테이블이 삭제되었습니다.
+
+SQL> ed Ex19
+
+SQL> insert into Ex19 values (1, 'test1');
+insert into Ex19 values (1, 'test1')
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> insert into Ex19 values (2, 'test2');
+insert into Ex19 values (2, 'test2')
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> alter table Ex19 drop constraint Ex19_num_pk;
+alter table Ex19 drop constraint Ex19_num_pk
+*
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> alter table Ex19 add constraint Ex19_num_pk primary key(num);
+alter table Ex19 add constraint Ex19_num_pk primary key(num)
+*
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> delete from Ex19;
+delete from Ex19
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> alter table Ex19 add constraint Ex19_num_pk_ primary key(num);
+alter table Ex19 add constraint Ex19_num_pk_ primary key(num)
+*
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> @Ex19.sql
+
+테이블이 생성되었습니다.
+
+SQL> alter table Ex19 add constraint Ex19_num_pk_ primary key(num);
+alter table Ex19 add constraint Ex19_num_pk_ primary key(num)
+                                             *
+1행에 오류:
+ORA-02260: 테이블에는 기본 키를 1 개만 포함시킬 수 있습니다 
+
+
+SQL> delete from Ex19;
+
+0 행이 삭제되었습니다.
+
+SQL> alter table Ex19 add constraint Ex19_num_pk_ primary key(num);
+alter table Ex19 add constraint Ex19_num_pk_ primary key(num)
+                                             *
+1행에 오류:
+ORA-02260: 테이블에는 기본 키를 1 개만 포함시킬 수 있습니다 
+
+
+SQL> desc Ex18;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ NUM                                       NOT NULL NUMBER
+ NAME                                      NOT NULL VARCHAR2(15)
+
+SQL> insert into Ex18 values(1, 'test3');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> alter table Ex18 drop contraint SYS_C004010;
+alter table Ex18 drop contraint SYS_C004010
+                      *
+1행에 오류:
+ORA-00905: 누락된 키워드 
+
+
+SQL> ed Ex20
+
+SQL> @Ex20.sql
+	name carchar2(15),
+	             *
+3행에 오류:
+ORA-00907: 누락된 우괄호 
+
+
+
+테이블이 생성되었습니다.
+
+SQL> @Ex20.sql
+
+테이블이 생성되었습니다.
+
+create table Ex21(
+             *
+1행에 오류:
+ORA-00955: 기존의 객체가 이름을 사용하고 있습니다. 
+
+
+SQL> @Ex20.sql
+create table Ex20(
+             *
+1행에 오류:
+ORA-00955: 기존의 객체가 이름을 사용하고 있습니다. 
+
+
+create table Ex21(
+             *
+1행에 오류:
+ORA-00955: 기존의 객체가 이름을 사용하고 있습니다. 
+
+
+SQL> delete Ex21.sql
+  2  ;
+delete Ex21.sql
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> @Ex20.sql
+create table Ex20(
+             *
+1행에 오류:
+ORA-00955: 기존의 객체가 이름을 사용하고 있습니다. 
+
+
+create table Ex21(
+             *
+1행에 오류:
+ORA-00955: 기존의 객체가 이름을 사용하고 있습니다. 
+
+
+SQL> insert into Ex20 values (5555,'new2',4);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> ed Ex20;\]
+
+SQL> drop table Ex20;
+
+테이블이 삭제되었습니다.
+
+SQL> drop table Ex21;
+
+테이블이 삭제되었습니다.
+
+SQL> @Ex20
+
+테이블이 생성되었습니다.
+
+
+테이블이 생성되었습니다.
+
+SQL> drop table Ex20;
+
+테이블이 삭제되었습니다.
+
+SQL> drop table Ex21;
+
+테이블이 삭제되었습니다.
+
+SQL> @Ex20.sql
+
+테이블이 생성되었습니다.
+
+
+테이블이 생성되었습니다.
+
+SQL> drop table Ex21;
+
+테이블이 삭제되었습니다.
+
+SQL> 
+SQL> insert into Ex21 values(1, '영업');
+insert into Ex21 values(1, '영업')
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> insert into Ex21 values(1, '영업');
+insert into Ex21 values(1, '영업')
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> insert into Ex21 values (4, '총무');
+insert into Ex21 values (4, '총무')
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> insert into Ex20 vlaues (5555, 'new1', 4);
+insert into Ex20 vlaues (5555, 'new1', 4)
+                         *
+1행에 오류:
+ORA-00928: 누락된 SELECT 키워드 
+
+
+SQL> 
+SQL> select * from Ex21
+  2  ;
+select * from Ex21
+              *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> select * from Ex21;
+select * from Ex21
+              *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> select * from Ex20;
+
+선택된 레코드가 없습니다.
+
+SQL> insert into Ex21 values (4, '총무');
+insert into Ex21 values (4, '총무')
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> ed Ex22.sql
+
+SQL> 
+SQL> 
+SQL> 
+SQL> insert into Ex22 values (1111, 'user1', 'M');
+insert into Ex22 values (1111, 'user1', 'M')
+            *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> @Ex22.sql
+	gender char2(1) check (gender in('M', 'F'))
+	            *
+4행에 오류:
+ORA-00907: 누락된 우괄호 
+
+
+SQL> @Ex22.sql
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex22 values (1111, 'user1', 'M');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex22 values (1111, 'user1', 'M', 1);
+insert into Ex22 values (1111, 'user1', 'M', 1)
+            *
+1행에 오류:
+ORA-00913: 값의 수가 너무 많습니다 
+
+
+SQL> @Ex22.sql
+
+테이블이 삭제되었습니다.
+
+
+테이블이 생성되었습니다.
+
+SQL> insert into Ex22 values (1111, 'user1', 'M', 1);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex22 values (2222, 'user2', 'M', 120);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex22 values (3333, 'user3', 'M', 121);
+insert into Ex22 values (3333, 'user3', 'M', 121)
+*
+1행에 오류:
+ORA-02290: 체크 제약조건(SCOTT.SYS_C004028)이 위배되었습니다 
+
+
+SQL> select * from Ex20, 21
+  2  ;
+select * from Ex20, 21
+                    *
+1행에 오류:
+ORA-00903: 테이블명이 부적합합니다 
+
+
+SQL> select * from Ex22;
+
+     SABUN NAME                           GE        AGE                         
+---------- ------------------------------ -- ----------                         
+      1111 user1                          M           1                         
+      2222 user2                          M         120                         
+
+SQL> ed Ex22.sql
+
+SQL> 
+SQL> @Ex20.sql
+
+테이블이 생성되었습니다.
+
+create table Ex20(
+             *
+1행에 오류:
+ORA-00955: 기존의 객체가 이름을 사용하고 있습니다. 
+
+
+
+테이블이 변경되었습니다.
+
+SQL> insert into Ex21 values(1, '영업');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex21 values(2, '회계');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex21 values(3, '생산');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex21 values(4, '여엉ㅂ');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex21 values(4, '영업');
+insert into Ex21 values(4, '영업')
+*
+1행에 오류:
+ORA-00001: 무결성 제약 조건(SCOTT.SYS_C004031)에 위배됩니다 
+
+
+SQL> 
+SQL> select * from Ex20;
+
+선택된 레코드가 없습니다.
+
+SQL> select * from Ex21;
+
+       NUM JOB                                                                  
+---------- ------------------------------                                       
+         1 영업                                                                 
+         2 회계                                                                 
+         3 생산                                                                 
+         4 여엉ㅂ                                                               
+
+SQL> ed Ex20.sql
+
+SQL> insert into Ex20 values(1111, '영업', 1);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex20 values(2222, '회계', 2);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex20 values(3333, '생산', 3);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex20 values(4444, '영업', 4);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> select * from Ex20;
+
+     SABUN NAME                                  NUM                            
+---------- ------------------------------ ----------                            
+      1111 영업                                    1                            
+      2222 회계                                    2                            
+      3333 생산                                    3                            
+      4444 영업                                    4                            
+
+SQL> select * from Ex21;
+
+       NUM JOB                                                                  
+---------- ------------------------------                                       
+         1 영업                                                                 
+         2 회계                                                                 
+         3 생산                                                                 
+         4 여엉ㅂ                                                               
+
+SQL> select * from Ex20, Ex21;
+
+     SABUN NAME                                  NUM        NUM                 
+---------- ------------------------------ ---------- ----------                 
+JOB                                                                             
+------------------------------                                                  
+      1111 영업                                    1          1                 
+영업                                                                            
+                                                                                
+      1111 영업                                    1          2                 
+회계                                                                            
+                                                                                
+      1111 영업                                    1          3                 
+생산                                                                            
+                                                                                
+
+     SABUN NAME                                  NUM        NUM                 
+---------- ------------------------------ ---------- ----------                 
+JOB                                                                             
+------------------------------                                                  
+      1111 영업                                    1          4                 
+여엉ㅂ                                                                          
+                                                                                
+      2222 회계                                    2          1                 
+영업                                                                            
+                                                                                
+      2222 회계                                    2          2                 
+회계                                                                            
+                                                                                
+
+     SABUN NAME                                  NUM        NUM                 
+---------- ------------------------------ ---------- ----------                 
+JOB                                                                             
+------------------------------                                                  
+      2222 회계                                    2          3                 
+생산                                                                            
+                                                                                
+      2222 회계                                    2          4                 
+여엉ㅂ                                                                          
+                                                                                
+      3333 생산                                    3          1                 
+영업                                                                            
+                                                                                
+
+     SABUN NAME                                  NUM        NUM                 
+---------- ------------------------------ ---------- ----------                 
+JOB                                                                             
+------------------------------                                                  
+      3333 생산                                    3          2                 
+회계                                                                            
+                                                                                
+      3333 생산                                    3          3                 
+생산                                                                            
+                                                                                
+      3333 생산                                    3          4                 
+여엉ㅂ                                                                          
+                                                                                
+
+     SABUN NAME                                  NUM        NUM                 
+---------- ------------------------------ ---------- ----------                 
+JOB                                                                             
+------------------------------                                                  
+      4444 영업                                    4          1                 
+영업                                                                            
+                                                                                
+      4444 영업                                    4          2                 
+회계                                                                            
+                                                                                
+      4444 영업                                    4          3                 
+생산                                                                            
+                                                                                
+
+     SABUN NAME                                  NUM        NUM                 
+---------- ------------------------------ ---------- ----------                 
+JOB                                                                             
+------------------------------                                                  
+      4444 영업                                    4          4                 
+여엉ㅂ                                                                          
+                                                                                
+
+16 개의 행이 선택되었습니다.
+
+SQL> select * from ex21;
+
+       NUM JOB                                                                  
+---------- ------------------------------                                       
+         1 영업                                                                 
+         2 회계                                                                 
+         3 생산                                                                 
+         4 여엉ㅂ                                                               
+
+SQL> insert into Ex21 values (4, '관리');
+insert into Ex21 values (4, '관리')
+*
+1행에 오류:
+ORA-00001: 무결성 제약 조건(SCOTT.SYS_C004031)에 위배됩니다 
+
+
+SQL> alter into Ex21 values (4, '관리');
+alter into Ex21 values (4, '관리')
+      *
+1행에 오류:
+ORA-00940: ALTER 명령어가 부적합합니다 
+
+
+SQL> select * from Ex20 a, Ex21 b where b.num = a.num(+);
+
+     SABUN NAME                                  NUM        NUM                 
+---------- ------------------------------ ---------- ----------                 
+JOB                                                                             
+------------------------------                                                  
+      1111 영업                                    1          1                 
+영업                                                                            
+                                                                                
+      2222 회계                                    2          2                 
+회계                                                                            
+                                                                                
+      3333 생산                                    3          3                 
+생산                                                                            
+                                                                                
+
+     SABUN NAME                                  NUM        NUM                 
+---------- ------------------------------ ---------- ----------                 
+JOB                                                                             
+------------------------------                                                  
+      4444 영업                                    4          4                 
+여엉ㅂ                                                                          
+                                                                                
+
+SQL> ed Ex20.sql
+
+SQL> 
+SQL> 
+SQL> select empno,ename,mgr from emp;
+
+     EMPNO ENAME                       MGR                                      
+---------- -------------------- ----------                                      
+      7369 SMITH                      7902                                      
+      7499 ALLEN                      7698                                      
+      7521 WARD                       7698                                      
+      7566 JONES                      7839                                      
+      7654 MARTIN                     7698                                      
+      7698 BLAKE                      7839                                      
+      7782 CLARK                      7839                                      
+      7788 SCOTT                      7566                                      
+      7839 KING                                                                 
+      7844 TURNER                     7698                                      
+      7876 ADAMS                      7788                                      
+
+     EMPNO ENAME                       MGR                                      
+---------- -------------------- ----------                                      
+      7900 JAMES                      7698                                      
+      7902 FORD                       7566                                      
+      7934 MILLER                     7782                                      
+
+14 개의 행이 선택되었습니다.
+
+SQL> select * from emp.emp;
+select * from emp.emp
+                  *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다 
+
+
+SQL> select * from emp, emp;
+select * from emp, emp
+       *
+1행에 오류:
+ORA-00918: 열의 정의가 애매합니다 
+
+
+SQL> select a.name, b.name from emp A, emp B;
+select a.name, b.name from emp A, emp B
+               *
+1행에 오류:
+ORA-00904: "B"."NAME": 부적합한 식별자 
+
+
+SQL> select a.name, b.name from emp A, emp B;
+select a.name, b.name from emp A, emp B
+               *
+1행에 오류:
+ORA-00904: "B"."NAME": 부적합한 식별자 
+
+
+SQL> select a.name, b.name from emp A, emp B where a.mgr=b.empno;
+select a.name, b.name from emp A, emp B where a.mgr=b.empno
+               *
+1행에 오류:
+ORA-00904: "B"."NAME": 부적합한 식별자 
+
+
+SQL> select a.ename, b.ename from emp A, emp B where a.mgr=b.empno;
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+SMITH                FORD                                                       
+ALLEN                BLAKE                                                      
+WARD                 BLAKE                                                      
+JONES                KING                                                       
+MARTIN               BLAKE                                                      
+BLAKE                KING                                                       
+CLARK                KING                                                       
+SCOTT                JONES                                                      
+TURNER               BLAKE                                                      
+ADAMS                SCOTT                                                      
+JAMES                BLAKE                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+FORD                 JONES                                                      
+MILLER               CLARK                                                      
+
+13 개의 행이 선택되었습니다.
+
+SQL> select a.ename, b.ename from emp A, emp B;
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+SMITH                SMITH                                                      
+SMITH                ALLEN                                                      
+SMITH                WARD                                                       
+SMITH                JONES                                                      
+SMITH                MARTIN                                                     
+SMITH                BLAKE                                                      
+SMITH                CLARK                                                      
+SMITH                SCOTT                                                      
+SMITH                KING                                                       
+SMITH                TURNER                                                     
+SMITH                ADAMS                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+SMITH                JAMES                                                      
+SMITH                FORD                                                       
+SMITH                MILLER                                                     
+ALLEN                SMITH                                                      
+ALLEN                ALLEN                                                      
+ALLEN                WARD                                                       
+ALLEN                JONES                                                      
+ALLEN                MARTIN                                                     
+ALLEN                BLAKE                                                      
+ALLEN                CLARK                                                      
+ALLEN                SCOTT                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+ALLEN                KING                                                       
+ALLEN                TURNER                                                     
+ALLEN                ADAMS                                                      
+ALLEN                JAMES                                                      
+ALLEN                FORD                                                       
+ALLEN                MILLER                                                     
+WARD                 SMITH                                                      
+WARD                 ALLEN                                                      
+WARD                 WARD                                                       
+WARD                 JONES                                                      
+WARD                 MARTIN                                                     
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+WARD                 BLAKE                                                      
+WARD                 CLARK                                                      
+WARD                 SCOTT                                                      
+WARD                 KING                                                       
+WARD                 TURNER                                                     
+WARD                 ADAMS                                                      
+WARD                 JAMES                                                      
+WARD                 FORD                                                       
+WARD                 MILLER                                                     
+JONES                SMITH                                                      
+JONES                ALLEN                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+JONES                WARD                                                       
+JONES                JONES                                                      
+JONES                MARTIN                                                     
+JONES                BLAKE                                                      
+JONES                CLARK                                                      
+JONES                SCOTT                                                      
+JONES                KING                                                       
+JONES                TURNER                                                     
+JONES                ADAMS                                                      
+JONES                JAMES                                                      
+JONES                FORD                                                       
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+JONES                MILLER                                                     
+MARTIN               SMITH                                                      
+MARTIN               ALLEN                                                      
+MARTIN               WARD                                                       
+MARTIN               JONES                                                      
+MARTIN               MARTIN                                                     
+MARTIN               BLAKE                                                      
+MARTIN               CLARK                                                      
+MARTIN               SCOTT                                                      
+MARTIN               KING                                                       
+MARTIN               TURNER                                                     
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+MARTIN               ADAMS                                                      
+MARTIN               JAMES                                                      
+MARTIN               FORD                                                       
+MARTIN               MILLER                                                     
+BLAKE                SMITH                                                      
+BLAKE                ALLEN                                                      
+BLAKE                WARD                                                       
+BLAKE                JONES                                                      
+BLAKE                MARTIN                                                     
+BLAKE                BLAKE                                                      
+BLAKE                CLARK                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+BLAKE                SCOTT                                                      
+BLAKE                KING                                                       
+BLAKE                TURNER                                                     
+BLAKE                ADAMS                                                      
+BLAKE                JAMES                                                      
+BLAKE                FORD                                                       
+BLAKE                MILLER                                                     
+CLARK                SMITH                                                      
+CLARK                ALLEN                                                      
+CLARK                WARD                                                       
+CLARK                JONES                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+CLARK                MARTIN                                                     
+CLARK                BLAKE                                                      
+CLARK                CLARK                                                      
+CLARK                SCOTT                                                      
+CLARK                KING                                                       
+CLARK                TURNER                                                     
+CLARK                ADAMS                                                      
+CLARK                JAMES                                                      
+CLARK                FORD                                                       
+CLARK                MILLER                                                     
+SCOTT                SMITH                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+SCOTT                ALLEN                                                      
+SCOTT                WARD                                                       
+SCOTT                JONES                                                      
+SCOTT                MARTIN                                                     
+SCOTT                BLAKE                                                      
+SCOTT                CLARK                                                      
+SCOTT                SCOTT                                                      
+SCOTT                KING                                                       
+SCOTT                TURNER                                                     
+SCOTT                ADAMS                                                      
+SCOTT                JAMES                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+SCOTT                FORD                                                       
+SCOTT                MILLER                                                     
+KING                 SMITH                                                      
+KING                 ALLEN                                                      
+KING                 WARD                                                       
+KING                 JONES                                                      
+KING                 MARTIN                                                     
+KING                 BLAKE                                                      
+KING                 CLARK                                                      
+KING                 SCOTT                                                      
+KING                 KING                                                       
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+KING                 TURNER                                                     
+KING                 ADAMS                                                      
+KING                 JAMES                                                      
+KING                 FORD                                                       
+KING                 MILLER                                                     
+TURNER               SMITH                                                      
+TURNER               ALLEN                                                      
+TURNER               WARD                                                       
+TURNER               JONES                                                      
+TURNER               MARTIN                                                     
+TURNER               BLAKE                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+TURNER               CLARK                                                      
+TURNER               SCOTT                                                      
+TURNER               KING                                                       
+TURNER               TURNER                                                     
+TURNER               ADAMS                                                      
+TURNER               JAMES                                                      
+TURNER               FORD                                                       
+TURNER               MILLER                                                     
+ADAMS                SMITH                                                      
+ADAMS                ALLEN                                                      
+ADAMS                WARD                                                       
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+ADAMS                JONES                                                      
+ADAMS                MARTIN                                                     
+ADAMS                BLAKE                                                      
+ADAMS                CLARK                                                      
+ADAMS                SCOTT                                                      
+ADAMS                KING                                                       
+ADAMS                TURNER                                                     
+ADAMS                ADAMS                                                      
+ADAMS                JAMES                                                      
+ADAMS                FORD                                                       
+ADAMS                MILLER                                                     
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+JAMES                SMITH                                                      
+JAMES                ALLEN                                                      
+JAMES                WARD                                                       
+JAMES                JONES                                                      
+JAMES                MARTIN                                                     
+JAMES                BLAKE                                                      
+JAMES                CLARK                                                      
+JAMES                SCOTT                                                      
+JAMES                KING                                                       
+JAMES                TURNER                                                     
+JAMES                ADAMS                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+JAMES                JAMES                                                      
+JAMES                FORD                                                       
+JAMES                MILLER                                                     
+FORD                 SMITH                                                      
+FORD                 ALLEN                                                      
+FORD                 WARD                                                       
+FORD                 JONES                                                      
+FORD                 MARTIN                                                     
+FORD                 BLAKE                                                      
+FORD                 CLARK                                                      
+FORD                 SCOTT                                                      
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+FORD                 KING                                                       
+FORD                 TURNER                                                     
+FORD                 ADAMS                                                      
+FORD                 JAMES                                                      
+FORD                 FORD                                                       
+FORD                 MILLER                                                     
+MILLER               SMITH                                                      
+MILLER               ALLEN                                                      
+MILLER               WARD                                                       
+MILLER               JONES                                                      
+MILLER               MARTIN                                                     
+
+ENAME                ENAME                                                      
+-------------------- --------------------                                       
+MILLER               BLAKE                                                      
+MILLER               CLARK                                                      
+MILLER               SCOTT                                                      
+MILLER               KING                                                       
+MILLER               TURNER                                                     
+MILLER               ADAMS                                                      
+MILLER               JAMES                                                      
+MILLER               FORD                                                       
+MILLER               MILLER                                                     
+
+196 개의 행이 선택되었습니다.
+
+SQL> update Ex20 set Name sabun=영업;
+update Ex20 set Name sabun=영업
+                     *
+1행에 오류:
+ORA-00927: 누락된 등호 
+
+
+SQL> update Ex20 set name SABUN=영업;
+update Ex20 set name SABUN=영업
+                     *
+1행에 오류:
+ORA-00927: 누락된 등호 
+
+
+SQL> update Ex20 set name SABUN='영업';
+update Ex20 set name SABUN='영업'
+                     *
+1행에 오류:
+ORA-00927: 누락된 등호 
+
+
+SQL> update Ex20 set SABUN='영업';
+update Ex20 set SABUN='영업'
+                      *
+1행에 오류:
+ORA-01722: 수치가 부적합합니다 
+
+
+SQL> update Ex20 set SABUN='영업';
+update Ex20 set SABUN='영업'
+                      *
+1행에 오류:
+ORA-01722: 수치가 부적합합니다 
+
+
+SQL> update Ex20 set sabun = '영업';
+update Ex20 set sabun = '영업'
+                        *
+1행에 오류:
+ORA-01722: 수치가 부적합합니다 
+
+
+SQL> desc Ex20;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ SABUN                                     NOT NULL NUMBER
+ NAME                                               VARCHAR2(15)
+ NUM                                                NUMBER
+
+SQL> desc Ex21;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ NUM                                       NOT NULL NUMBER
+ JOB                                       NOT NULL VARCHAR2(15)
+
+SQL> update Ex20 set JOB = '영업';
+update Ex20 set JOB = '영업'
+                *
+1행에 오류:
+ORA-00904: "JOB": 부적합한 식별자 
+
+
+SQL> update Ex21 set JOB = '영업';
+
+4 행이 갱신되었습니다.
+
+SQL> desc Ex21;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ NUM                                       NOT NULL NUMBER
+ JOB                                       NOT NULL VARCHAR2(15)
+
+SQL> Ex21;
+SP2-0042: 알 수 없는 명령어 "Ex21" - 나머지 줄 무시.
+SQL> select * from Ex21;
+
+       NUM JOB                                                                  
+---------- ------------------------------                                       
+         1 영업                                                                 
+         2 영업                                                                 
+         3 영업                                                                 
+         4 영업                                                                 
+
+SQL> rollback
+  2  ;
+
+롤백이 완료되었습니다.
+
+SQL> select * from Ex21;
+
+선택된 레코드가 없습니다.
+
+SQL> rollback
+  2  ;
+
+롤백이 완료되었습니다.
+
+SQL> select * from Ex21;
+
+선택된 레코드가 없습니다.
+
+SQL> insert into Ex21 values (1,'영업);
+ERROR:
+ORA-01756: 단일 인용부를 지정해 주십시오 
+
+
+SQL> insert into Ex21 values (1,'영업');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex21 values (2,'회계');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex21 values (3,'생산');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex21 values (4,'관리');
+
+1 개의 행이 만들어졌습니다.
+
+SQL> select * from Ex21;
+
+       NUM JOB                                                                  
+---------- ------------------------------                                       
+         1 영업                                                                 
+         2 회계                                                                 
+         3 생산                                                                 
+         4 관리                                                                 
+
+SQL> select * from Ex22;
+
+     SABUN NAME                           GE        AGE                         
+---------- ------------------------------ -- ----------                         
+      1111 user1                          M           1                         
+      2222 user2                          M         120                         
+
+SQL> select * from Ex20;
+
+선택된 레코드가 없습니다.
+
+SQL> insert into Ex20 values(1111, '영업', 1);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> update Ex20 set name='user1' where num=1;
+
+1 행이 갱신되었습니다.
+
+SQL> select * from Ex20;
+
+     SABUN NAME                                  NUM                            
+---------- ------------------------------ ----------                            
+      1111 user1                                   1                            
+
+SQL> insert into Ex20 values(2222, 'user2', 2);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex20 values(3333, 'user3', 3);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into Ex20 values(4444, 'user4', 4);
+
+1 개의 행이 만들어졌습니다.
+
+SQL> select * from Ex20;
+
+     SABUN NAME                                  NUM                            
+---------- ------------------------------ ----------                            
+      1111 user1                                   1                            
+      2222 user2                                   2                            
+      3333 user3                                   3                            
+      4444 user4                                   4                            
+
+SQL> spool Ex23

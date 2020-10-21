@@ -1,0 +1,260 @@
+SQL> select ename, (select enma from emp where mgr) from emp;
+select ename, (select enma from emp where mgr) from emp
+                                             *
+1행에 오류:
+ORA-00920: 관계 연산자가 부적합합니다 
+
+
+SQL> select ename, (select enma from emp where mgr=empno) from emp;
+select ename, (select enma from emp where mgr=empno) from emp
+                      *
+1행에 오류:
+ORA-00904: "ENMA": 부적합한 식별자 
+
+
+SQL> select ename, (select enma from emp b where mgr=empno) from emp;
+select ename, (select enma from emp b where mgr=empno) from emp
+                      *
+1행에 오류:
+ORA-00904: "ENMA": 부적합한 식별자 
+
+
+SQL> ed Ex24.sql
+
+SQL> select * from (select * from dept);
+
+    DEPTNO DNAME                        LOC                                     
+---------- ---------------------------- --------------------------              
+        10 ACCOUNTING                   NEW YORK                                
+        20 RESEARCH                     DALLAS                                  
+        30 SALES                        CHICAGO                                 
+        40 OPERATIONS                   BOSTON                                  
+        60 test                         test                                    
+        70 test                         test                                    
+        80 test                         test                                    
+        90 test                         test                                    
+
+8 개의 행이 선택되었습니다.
+
+SQL> insert into dept (50,
+  2  '관리부', '서울);
+ERROR:
+ORA-01756: 단일 인용부를 지정해 주십시오 
+
+
+SQL> select * from (select * from dept where deptno<40);
+
+    DEPTNO DNAME                        LOC                                     
+---------- ---------------------------- --------------------------              
+        10 ACCOUNTING                   NEW YORK                                
+        20 RESEARCH                     DALLAS                                  
+        30 SALES                        CHICAGO                                 
+
+SQL> select deptno, dname from (select * from dept where deptno<40);
+
+    DEPTNO DNAME                                                                
+---------- ----------------------------                                         
+        10 ACCOUNTING                                                           
+        20 RESEARCH                                                             
+        30 SALES                                                                
+
+SQL> select * from (select name, job from Ex21 inner join using(num));
+select * from (select name, job from Ex21 inner join using(num))
+                                                          *
+1행에 오류:
+ORA-00905: 누락된 키워드 
+
+
+SQL> select * from (select name, job from Ex21 inner join using (num));
+select * from (select name, job from Ex21 inner join using (num))
+                                                           *
+1행에 오류:
+ORA-00905: 누락된 키워드 
+
+
+SQL> select * from (select name, job from Ex21 inner join Ex20 using (num));
+
+NAME                           JOB                                              
+------------------------------ ------------------------------                   
+user1                          영업                                             
+user2                          회계                                             
+user3                          생산                                             
+user4                          관리                                             
+
+SQL> select * from (select name, job from Ex21 inner join Ex20 using (num));
+
+NAME                           JOB                                              
+------------------------------ ------------------------------                   
+user1                          영업                                             
+user2                          회계                                             
+user3                          생산                                             
+user4                          관리                                             
+
+SQL> select (select '출력'from dual) from dept;
+
+(SELECT'출력                                                                    
+------------                                                                    
+출력                                                                            
+출력                                                                            
+출력                                                                            
+출력                                                                            
+출력                                                                            
+출력                                                                            
+출력                                                                            
+출력                                                                            
+
+8 개의 행이 선택되었습니다.
+
+SQL> select (select '출력', '출력2' from dual) from dept;
+select (select '출력', '출력2' from dual) from dept
+        *
+1행에 오류:
+ORA-00913: 값의 수가 너무 많습니다 
+
+
+SQL> select (select deptno from dept) from dept;
+select (select deptno from dept) from dept
+        *
+1행에 오류:
+ORA-01427: 단일 행 하위 질의에 2개 이상의 행이 리턴되었습니다. 
+
+
+SQL> select deptno.sum(deptno) from dept;
+select deptno.sum(deptno) from dept
+       *
+1행에 오류:
+ORA-00904: "DEPTNO"."SUM": 부적합한 식별자 
+
+
+SQL> select deptno,sum(deptno) from dept;
+select deptno,sum(deptno) from dept
+       *
+1행에 오류:
+ORA-00937: 단일 그룹의 그룹 함수가 아닙니다 
+
+
+SQL> select ename, sal from emp where sal > (select avg(sal) from emp);
+
+ENAME                       SAL                                                 
+-------------------- ----------                                                 
+JONES                      2975                                                 
+BLAKE                      2850                                                 
+CLARK                      2450                                                 
+SCOTT                      3000                                                 
+KING                       5000                                                 
+FORD                       3000                                                 
+
+6 개의 행이 선택되었습니다.
+
+SQL> select ename from emp where deptno in (select deptno from dept where deptno<40);
+
+ENAME                                                                           
+--------------------                                                            
+SMITH                                                                           
+ALLEN                                                                           
+WARD                                                                            
+JONES                                                                           
+MARTIN                                                                          
+BLAKE                                                                           
+CLARK                                                                           
+SCOTT                                                                           
+KING                                                                            
+TURNER                                                                          
+ADAMS                                                                           
+
+ENAME                                                                           
+--------------------                                                            
+JAMES                                                                           
+FORD                                                                            
+MILLER                                                                          
+
+14 개의 행이 선택되었습니다.
+
+SQL> select deptno from dept where deptno<40;
+
+    DEPTNO                                                                      
+----------                                                                      
+        10                                                                      
+        20                                                                      
+        30                                                                      
+
+SQL> insert into Ex18 values (select * from Ex18);
+insert into Ex18 values (select * from Ex18)
+                         *
+1행에 오류:
+ORA-00936: 누락된 표현식 
+
+
+SQL> select * from Ex18;
+
+       NUM NAME                                                                 
+---------- ------------------------------                                       
+         1 test3                                                                
+
+SQL> select * from Ex18;
+
+       NUM NAME                                                                 
+---------- ------------------------------                                       
+         1 test3                                                                
+
+SQL> create table Ex24 as select * from Ex19;
+
+테이블이 생성되었습니다.
+
+SQL> desc Ex24;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ NUM                                                NUMBER
+ NAME                                               VARCHAR2(15)
+
+SQL> select * rom Ex24;
+select * rom Ex24
+         *
+1행에 오류:
+ORA-00923: FROM 키워드가 필요한 위치에 없습니다. 
+
+
+SQL> select * from Ex24;
+
+선택된 레코드가 없습니다.
+
+SQL> create table deptcopy as select * from dept;
+
+테이블이 생성되었습니다.
+
+SQL> desc deptcopy;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                             NUMBER(2)
+ DNAME                                              VARCHAR2(14)
+ LOC                                                VARCHAR2(13)
+
+SQL> create table empcopy as select empno, ename, sal from emp;
+
+테이블이 생성되었습니다.
+
+SQL> select * from empcopy;
+
+     EMPNO ENAME                       SAL                                      
+---------- -------------------- ----------                                      
+      7369 SMITH                       800                                      
+      7499 ALLEN                      1600                                      
+      7521 WARD                       1250                                      
+      7566 JONES                      2975                                      
+      7654 MARTIN                     1250                                      
+      7698 BLAKE                      2850                                      
+      7782 CLARK                      2450                                      
+      7788 SCOTT                      3000                                      
+      7839 KING                       5000                                      
+      7844 TURNER                     1500                                      
+      7876 ADAMS                      1100                                      
+
+     EMPNO ENAME                       SAL                                      
+---------- -------------------- ----------                                      
+      7900 JAMES                       950                                      
+      7902 FORD                       3000                                      
+      7934 MILLER                     1300                                      
+
+14 개의 행이 선택되었습니다.
+
+SQL> spool off

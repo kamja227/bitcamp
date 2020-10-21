@@ -1,0 +1,31 @@
+package com.bit.day23;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Graphics;
+
+public class Ex04 extends Frame {
+	
+	class MyCanvas extends Canvas {
+		public void paint(Graphics g) {
+			g.drawString("welcome", 800/2, 600/2); // 글자가 아니라 자바가 그린 이미지
+			g.setColor(Color.RED);
+			g.drawLine(100, 100, 200, 200); // 선
+			
+			g.drawBox(300, 300, 100, 100);
+		}
+	}
+
+	public Ex04() {
+		java.awt.Canvas can = new MyCanvas();
+		add(can);
+		
+		setSize(800, 600);
+		setLocation(200, 200);
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		new Ex04();
+	}
+}

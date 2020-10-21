@@ -1,0 +1,1 @@
+sqlplus scott/tiger @Ex01.sql

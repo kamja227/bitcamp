@@ -1,0 +1,58 @@
+package com.bit.web01;
+
+import java.io.*;
+import java.net.*;
+
+public class Server extends Thread {
+	Socket sock;
+	
+	public Server(Socket sock) {
+		this.sock = sock;
+	}
+	
+	public void run() {
+		OutputStream os = null;
+		
+		try {
+			SocketAddress addr = sock.getRemoteSocketAddress();
+//			java.net.InetAddress iaddr = (IntAddress)addr;
+			System.out.println(addr.toString());
+			os = sock.getOutputStream();
+			///////////////////////////////////////////////////
+			os.write("HTTP/1.1 200 OK".getBytes()); // http 요청 성공 코드 200 OK
+			os.write("Hello world ... ".getBytes());
+			os.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(os != null) os.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	} // run end
+	
+	public static void main(String[] args) {
+		int port = 8080;
+		ServerSocket serv = null;
+		
+		try {
+			serv = new ServerSocket(port);
+			while(true) { // 종료되지 않게 계속
+				Socket sock = serv.accept(); // 접속이 들어오면 연결된 소켓을 이용해서 io작업 할 수 있게
+				Server thr = new Server(sock);
+				thr.start();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(serv != null) serv.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	
+	} // main end
+} // class end

@@ -1,0 +1,45 @@
+package com.bit.day23;
+
+import java.awt.Choice;
+import java.awt.Frame;
+import java.awt.List;
+import java.awt.Panel;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+public class Ex13 extends Frame implements ItemListener {
+	Choice cho;
+	
+	public void itemStateChanged(ItemEvent e) {
+		System.out.println("이벤트 발동" + cho.getSelectedIndex());
+		System.out.println("이벤트 발동" + cho.getSelectedItem());
+	}
+
+	public Ex13() {
+		Panel p = new Panel();
+		cho = new Choice();
+		cho.addItemListener(this);
+		cho.addItem("item1");
+		cho.addItem("item2");
+		cho.addItem("item3");
+		cho.addItem("item4");
+		p.add(cho);
+		
+		List list = new List(); // java.awt.List;
+		list.addItem("item1");
+		list.addItem("item2");
+		list.addItem("item3");
+		list.addItem("item4");
+		p.add(list);
+		
+		setSize(500, 300);
+		setLocation(300, 200);
+		setVisible(true);
+	}
+	
+	
+	public static void main(String[] args) {
+		new Ex13();
+	}
+
+} 

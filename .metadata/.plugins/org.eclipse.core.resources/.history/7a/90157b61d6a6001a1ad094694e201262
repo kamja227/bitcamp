@@ -1,0 +1,19 @@
+package com.bit.day23;
+
+import java.awt.Canvas;
+import java.awt.Frame;
+
+public class Ex04 extends Frame {
+
+	public Ex04() {
+		java.awt.Canvas can = new Canvas();
+		add(can);
+		
+		setSize(800, 600);
+		setLocation(200, 200);
+		setvisible(true);
+	}
+	public static void main(String[] args) {
+		new Ex04();
+	}
+}

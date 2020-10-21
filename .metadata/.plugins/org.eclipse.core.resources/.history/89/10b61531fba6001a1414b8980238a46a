@@ -1,0 +1,59 @@
+package com.bit.day23;
+
+import java.awt.Checkbox;
+import java.awt.Choice;
+import java.awt.Frame;
+import java.awt.List;
+import java.awt.Panel;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Arrays;
+
+public class Ex13 extends Frame implements ItemListener {
+	Choice cho;
+	List list;
+	
+	public void itemStateChanged(ItemEvent e) { // 아이템 상태변화에 나타나는
+		int[] idxs = list.getSelectedIndexes();
+		String[] names = list.getSelectedItems();
+		
+		System.out.println(Arrays.toString(idxs));
+		System.out.println(Arrays.toString(names));
+	}
+
+	public Ex13() {
+		Panel p = new Panel();
+		Checkbox ch1 = new Checkbox("item1");
+		Checkbox ch2 = new Checkbox("item2");
+		Checkbox ch3 = new Checkbox("item3");
+		Checkbox ch4 = new Checkbox("item4");
+		
+		
+		cho = new Choice();
+//		cho.addItemListener(this);
+		cho.addItem("item1");
+		cho.addItem("item2");
+		cho.addItem("item3");
+		cho.addItem("item4");
+		p.add(cho);
+		
+		list = new List(4); // java.awt.List;
+		list.addItemListener(this);
+		list.addItem("item1");
+		list.addItem("item2");
+		list.addItem("item3");
+		list.addItem("item4");
+		
+		p.add(list);
+		add(p);
+		setSize(500, 300);
+		setLocation(300, 200);
+		setVisible(true);
+	}
+	
+	
+	public static void main(String[] args) {
+		new Ex13();
+	}
+
+} 

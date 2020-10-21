@@ -1,0 +1,135 @@
+package com.bit.test;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import org.omg.Messaging.SyncScopeHelper;
+// 학생성적관리프로그램(ver 1.0.0)
+// Student 클래스를 작성하여 학번, 이름, 국어, 영어, 수학을 담으시오
+// 자료구조를 활용하여 동적으로 작동되도록 하시오
+// 콘솔 입출력하도록 작성하시오
+// ex) 1.전체 2.상세 3.입력 4.수정 5.삭제 0.종료>2
+//	학번>1
+//	학번:1 이름:홍길동
+//	국어:90		영어:80		수학:70
+//	총점:000
+//	평균:00.00
+
+//학번 같으면 오류 잘못 입력하면 오류
+
+class Student {
+	int num, kor, eng, math;
+	String name;
+	Student() { }
+	int tot() { return kor + eng + math; }
+	double avg() { 
+		int avgg = (int)(double)tot()/3*100; ///////////////////////////////////
+		double avggg = (double)avgg/100.0;
+		//		return tot()/3; } 
+		return avggg; } 
+}
+// (int)((double)tot()/3*100)/100
+public class Test01 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("학생성적관리프로그램 (ver 1.0.0)");
+		String menu = "1.전체 2.상세 3.입력 4.수정 5.삭제 0.종료>";
+		ArrayList<Student> list = new ArrayList<Student>(); // 학생 성적을 담을 배열 list
+
+		while(true) {
+			System.out.print(menu);
+			int menuNum = Integer.parseInt(sc.nextLine());
+			
+			if(menuNum == 0) {
+				// 종료
+				System.out.println("프로그램이 종료됩니다");
+				break;
+				
+			} else if(menuNum == 1) { 
+				// 전체
+				System.out.println(list.size() + "명의 학생 성적 정보를 출력합니다. \n");
+				
+				for(int i=0; i<list.size(); i++) {
+					Student stu = list.get(i);
+					System.out.println("학번:" + stu.num + " 이름:" + stu.name);
+					System.out.println("국어:" + stu.kor + "\t영어:" + stu.eng + "\t수학:" + stu.math);
+					System.out.println("총점:" + stu.tot());
+					System.out.println("평균:" + stu.avg() + "\n");
+				}
+			} else if(menuNum == 2) {
+				// 상세
+				System.out.print("학번>");
+				int showNum = Integer.parseInt(sc.nextLine());
+				
+				for(int i=0; i<list.size(); i++) {
+					Student stu = list.get(i);
+					if(showNum == stu.num) {
+						System.out.println("학번:" + stu.num + " 이름:" + stu.name);
+						System.out.println("국어:" + stu.kor + "\t영어:" + stu.eng + "\t수학:" + stu.math);
+						System.out.println("총점:" + stu.tot());
+						System.out.println("평균:" + stu.avg() + "\n");
+						break;
+					}
+				}
+				
+			} else if(menuNum == 3) {
+				// 입력
+				Student stu = new Student();
+				System.out.print("학번>");
+				stu.num = Integer.parseInt(sc.nextLine());
+				System.out.print("이름>");
+				stu.name = sc.nextLine();
+				System.out.print("국어>");
+				stu.kor = Integer.parseInt(sc.nextLine());
+				System.out.print("영어>");
+				stu.eng = Integer.parseInt(sc.nextLine());
+				System.out.print("수학>");
+				stu.math = Integer.parseInt(sc.nextLine());
+				System.out.println();
+				
+				list.add(stu); // 입력한 학생 성적을 배열 list에 담는다
+				
+			} else if(menuNum == 4) {
+				// 수정
+				System.out.print("수정할 학생의 학번>");
+				int reNum = Integer.parseInt(sc.nextLine());
+				
+				for(int i=0; i<list.size(); i++) {
+					Student stu = list.get(i); // list에 저장된 첫번째 학생의 성적부터 가져오면서
+					if(reNum == stu.num) { // 수정할 학생의 학번과 같은 값을 찾는다
+						System.out.print("이름(" + stu.name + ")>");
+						stu.name = sc.nextLine();
+						System.out.print("국어(" + stu.kor + ")>");
+						stu.kor = Integer.parseInt(sc.nextLine());
+						System.out.print("영어(" + stu.eng + ")>");
+						stu.eng = Integer.parseInt(sc.nextLine());
+						System.out.print("수학(" + stu.math + ")>");
+						stu.math = Integer.parseInt(sc.nextLine());
+						System.out.println();
+						break;
+					}
+				}
+				
+			} else if(menuNum == 5) {
+				// 삭제
+				System.out.print("삭제할 학생의 학번>");
+				int delNum = Integer.parseInt(sc.nextLine());
+				
+				for(int i=0; i<list.size(); i++) {
+					Student stu = list.get(i); // list에 저장된 첫번째 학생의 성적부터 가져오면서
+					if(delNum == stu.num) { // 삭제할 학생의 학번과 같은 값을 찾는다
+						list.remove(i);
+						System.out.println(stu.name + " 학생의 성적 정보가 삭제되었습니다." + "\n");
+						break;
+					}
+				}
+			}
+				
+		} // while end
+		
+		
+		
+	} // main end
+} // Test01 end

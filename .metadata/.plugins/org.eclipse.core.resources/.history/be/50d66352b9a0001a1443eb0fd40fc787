@@ -1,0 +1,26 @@
+package com.bit.day17;
+
+import java.util.List;
+
+public class BookController {
+	private List<BookVO> inventoryList;
+	private List<BookVO> rentList;
+
+	public BookController9List<BookVO> inventorylist, List<BookVO> rentList) {
+		this.inventoryList = inventoryList;
+		this.rentList = rentList;
+	}
+
+	//뷰어가 대여되는 책을 보내주면 인벤토리에서 렌트로 이동시키는 메소드
+	//뷰어가 보내주는 BookVO 객체를 list에 추가하는 add 메소드
+	public void rentVO(BookVO b) {
+		inventoryList.add(b);
+		rentList.remove(b);
+	}
+	
+	//뷰어가 보내주는 BookVO 객체를 list에서 삭제하는 remove 메소드
+	public void returnBookVO(BookVO b) {
+		inventoryList.add(b);
+		rentList.remove(b);
+	}
+}

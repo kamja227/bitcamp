@@ -1,0 +1,20 @@
+package com.bit.day21;
+
+import java.io.File;
+
+public class Ex08 {
+
+	public static void main(String[] args) {
+		// ByteStream - output
+		File file = new File("ex08.bin");
+		java.io.FileOutputStream fos = null;
+		
+//		fos = new FileOutputStream(file);
+//		fos.write(65);
+		
+//		fos.close();
+//		System.out.println("작성완료");
+		
+		
+	}
+}

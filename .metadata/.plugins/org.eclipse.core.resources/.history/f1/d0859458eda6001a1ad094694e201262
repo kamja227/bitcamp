@@ -1,0 +1,25 @@
+package com.bit.day23;
+
+import java.awt.Button;
+import java.awt.Frame;
+
+public class Ex09 extends Frame {
+	// 절대좌표
+	
+	public Ex09() {
+		setResizable(false); // size 고정
+		setLayout(null); // 크기바꿔도 버튼 그대로
+		Button btn1 = new Button("버튼");
+		btn1.setSize(200, 200);
+		btn1.setLocation(0, 0);
+		
+		add(btn1);
+		setSize(500, 500);
+		setLocation(200, 200);
+		setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		new Ex09();
+	}
+}

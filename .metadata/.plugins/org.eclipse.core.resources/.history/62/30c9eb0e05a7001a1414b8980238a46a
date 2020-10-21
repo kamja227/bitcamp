@@ -1,0 +1,51 @@
+package com.bit.day23;
+
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
+
+public class Ex17 extends Frame {
+
+	public Ex17() {
+		
+		java.awt.Menu mn1 = new Menu();
+		mn1.setLabel("파일");
+		java.awt.MenuItem mn1_1 = new MenuItem();
+		mn1_1.setLabel("새파일");
+		mn1.add(mn1_1);
+		java.awt.MenuItem mn1_2 = new MenuItem();
+		mn1_2.setLabel("열기");
+		mn1.add(mn1_2);
+		java.awt.MenuItem mn1_3 = new MenuItem();
+		mn1_3.setLabel("저장");
+		mn1.add(mn1_3);
+		java.awt.MenuItem mn1_4 = new MenuItem();
+		mn1_4.setLabel("종료");
+		mn1.add(mn1_4);
+		
+		java.awt.Menu mn2 = new Menu();
+		mn2.setLabel("도움말");
+		java.awt.MenuItem mn2_1 = new MenuItem();
+		mn2_1.setLabel("정보");
+		mn1.add(mn2_1);
+		
+		java.awt.MenuBar mb =  new MenuBar();
+		mb.add(mn1);
+		mb.add(mn2);
+		
+		
+		setMenuBar(mb);
+		Button btn = new Button("test");
+		add(btn);
+		setSize(500, 500);
+		setLocation(400, 400);
+		setVisible(true);
+		
+	}
+	public static void main(String[] args) {
+		new Ex17();
+	}
+
+}

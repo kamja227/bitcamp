@@ -1,0 +1,43 @@
+package com.bit.day30;
+
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class Ex01 {
+	
+	public static void main(String[] args) {
+		// dept (insert)
+
+		String url = "jdbc:oracle:this:@127.0.0.1:1521:xe"; // listener port 1521
+		String sql = "insert into dept values (50, '包府何', '辑匡')";
+		oracle.jdbc.driver.OracleDriver driver = null;
+		driver = new oracle.jdbc.driver.OracleDriver();
+		java.sql.Connection conn = null;
+		java.util.Properties prop = null;
+//		java.sql.Statement stmt = null;
+		
+		prop = new Properties();
+		
+		prop.setProperty("user", "scott");
+		prop.setProperty("password", "tiger");
+		
+		try {
+			conn = java.sql.DriverManager.getConnection(url, prop);
+//			stmt = conn.createStatement();
+//			stmt.executeUpdate(sql);
+//			int result = stmt.executeUpdate(sql);
+			System.out.println("立加己傍 : " + (conn!=null));
+//			System.out.println("巩力绝捞 荐青" + result);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+//				if(stmt != null) stmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
+}
